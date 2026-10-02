@@ -9,3 +9,10 @@ def get_user(user_id:int):
 @app.get("users")
 def get_users(name):
     return {"name": name}
+
+@app.post("/create-user")
+def create_user(name:str, age:int):
+    return {
+        "name": name,
+        "age": age
+    }

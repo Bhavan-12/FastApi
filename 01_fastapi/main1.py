@@ -1,6 +1,7 @@
 from fastapi import FastAPI
+import json
 
-app = FastAPI()
+app= FastAPI()
 
 @app.get("/users/{user_id}")
 def get_user(user_id:int):
@@ -16,3 +17,11 @@ def create_user(name:str, age:int):
         "name": name,
         "age": age
     }
+
+def get_students():
+    with open("students.json", "r") as file:
+            return json.load(file)
+    
+@app.get("/students")
+def students():
+    return get_students()

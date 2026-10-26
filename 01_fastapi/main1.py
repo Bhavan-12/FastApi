@@ -36,10 +36,15 @@ def get_id(student_id:str):
         return data[student_id]
 
 @app.get("/filter")
-def filter(course:str):
-    data = get_students
+def filter(course:str = None):
+    data = get_students()
+    if course is None:
+        return data 
     filtered = {}
     for student_id, info in data.items():
-        if info["course"]== course:
+        if info["course"].lower()== course.lower():
             filtered[student_id] = info
     return filtered
+
+@app.get("/sort")
+def sort( )

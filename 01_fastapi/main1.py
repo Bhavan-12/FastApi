@@ -46,5 +46,21 @@ def filter(course:str = None):
             filtered[student_id] = info
     return filtered
 
-@app.get("/sort")
-def sort( )
+@app.get("/paginate")
+def paginate_students(page:int, limit:int):
+    data = get_students()
+    students = []
+    for student_id, info in data.items():
+        info['id'] = student_id
+        students.append(info)
+    start = (page-1) * limit
+    end = start + limit
+    page_student = students[start:end]
+    total_students = len(students)
+
+    return {
+        "page": page,
+        "limit": limit,
+        "total_students": total_students,
+        "students": page_student
+    }
